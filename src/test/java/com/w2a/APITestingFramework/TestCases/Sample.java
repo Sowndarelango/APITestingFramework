@@ -12,6 +12,8 @@ import static io.restassured.RestAssured.*;
 
 public class Sample extends BaseTest {
 
+	
+	// Testing Jenkins Poll SCM
 	@Test(dataProvider = "StripeAPICreateCustomer", dataProviderClass = DataUtils.class)
 	public void validateCreateCustomerAPIWithValidSecretKey(String name, String email, String description) {
 		Response response = given().auth().basic(config.getProperty("StripeAPIValidSecretKey"), "")
