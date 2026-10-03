@@ -1,0 +1,13 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Maven
+target/
+
+# Test reports
+test-output/
+
+# Sensitive configuration
+src/test/resources/properties/config.properties
