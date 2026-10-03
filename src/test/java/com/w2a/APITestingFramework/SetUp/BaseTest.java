@@ -11,39 +11,35 @@ import org.testng.annotations.BeforeSuite;
 import io.restassured.RestAssured;
 
 public class BaseTest {
-	
+
 	public static Properties config = new Properties();
 	private FileInputStream fis;
 
 	@BeforeSuite
 	public void SetUp() {
-		
+
 		try {
-			fis = new FileInputStream(".\\src\\test\\resources\\properties\\config.properties");
+			fis = new FileInputStream(
+					System.getProperty("config.file", "src/test/resources/properties/config.properties"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			config.load(fis);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RestAssured.baseURI=config.getProperty("StripeAPIBaseURI");
-		RestAssured.basePath=config.getProperty("StripeAPIBasePath");
 
-		
-		
+		RestAssured.baseURI = config.getProperty("StripeAPIBaseURI");
+		RestAssured.basePath = config.getProperty("StripeAPIBasePath");
+
 	}
-	
+
 	@AfterSuite
 	public void tearDown() {
-		
-		
+
 	}
 }
-
-
