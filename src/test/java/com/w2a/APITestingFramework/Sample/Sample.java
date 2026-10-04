@@ -1,4 +1,4 @@
-package com.w2a.APITestingFramework.TestCases;
+package com.w2a.APITestingFramework.Sample;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

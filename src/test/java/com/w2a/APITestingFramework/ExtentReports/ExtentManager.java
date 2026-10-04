@@ -1,26 +1,41 @@
+
 package com.w2a.APITestingFramework.ExtentReports;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class ExtentManager {
 
 	private static ExtentReports extent;
 
+	private static String reportPath;
+
 	public static synchronized ExtentReports getExtentReports() {
 
 		if (extent == null) {
 
-			String timestamp = LocalDateTime.now()
-			        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
-			
-			String reportPath = System.getProperty("user.dir") + File.separator + "test-output/ExtentReports/ExtentReport_" + timestamp + ".html";
+			// Create timestamp for unique report name
+			String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
 
+			// Create report directory
+			String reportDirectoryPath = System.getProperty("user.dir") + File.separator + "test-output"
+					+ File.separator + "ExtentReports";
+
+			File reportDirectory = new File(reportDirectoryPath);
+
+			if (!reportDirectory.exists()) {
+				reportDirectory.mkdirs();
+			}
+
+			// Create complete report path
+			reportPath = reportDirectoryPath + File.separator + "ExtentReport_" + timestamp + ".html";
+
+			// Create Extent Spark Reporter
 			ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
 
 			// Report title
@@ -35,8 +50,10 @@ public class ExtentManager {
 			// Date format
 			sparkReporter.config().setTimeStampFormat("dd-MM-yyyy HH:mm:ss");
 
+			// Create ExtentReports
 			extent = new ExtentReports();
 
+			// Attach Spark Reporter
 			extent.attachReporter(sparkReporter);
 
 			// System information
@@ -51,10 +68,21 @@ public class ExtentManager {
 		return extent;
 	}
 
+	/**
+	 * Flush the Extent Report.
+	 */
 	public static synchronized void flush() {
 
 		if (extent != null) {
 			extent.flush();
 		}
+	}
+
+	/**
+	 * Returns the exact report path generated for the current execution.
+	 */
+	public static String getReportPath() {
+
+		return reportPath;
 	}
 }

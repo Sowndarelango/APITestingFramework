@@ -8,6 +8,9 @@ import java.util.Properties;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import com.w2a.APITestingFramework.ExtentReports.ExtentManager;
+import com.w2a.APITestingFramework.Utilities.EmailUtils;
+
 import io.restassured.RestAssured;
 
 public class BaseTest {
@@ -36,10 +39,20 @@ public class BaseTest {
 		RestAssured.baseURI = config.getProperty("StripeAPIBaseURI");
 		RestAssured.basePath = config.getProperty("StripeAPIBasePath");
 
+		System.out.println(fis);
+
 	}
 
 	@AfterSuite
 	public void tearDown() {
 
+		// Complete the Extent report
+		ExtentManager.flush();
+
+		// Get the exact report generated for this execution
+		String reportPath = ExtentManager.getReportPath();
+
+		// Send report link through email
+		EmailUtils.sendEmail(reportPath);
 	}
 }
