@@ -25,7 +25,7 @@ public class PayPalAPITest extends BaseTest {
 				.contentType("application/x-www-form-urlencoded").formParam("grant_type", "client_credentials").when()
 				.post(PayPal_BaseURI + "/v1/oauth2/token");
 
-		response.prettyPrint();
+	//	response.prettyPrint();
 
 		System.out.println("Status Code: " + response.getStatusCode());
 

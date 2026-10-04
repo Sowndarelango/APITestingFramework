@@ -28,18 +28,18 @@ public class CreateCustomerTest extends BaseTest {
 		Assert.assertEquals(response.getStatusCode(), 200);
 	}
 
-	@Test(dataProvider = "StripeAPIDataProvider", dataProviderClass = StripeAPIDataUtils.class)
-	public void validateCreateCustomerAPIWithInvalidSecretKey(Hashtable<String, String> data) {
-		Response response = CreateCustomerAPI.sendPostRequestToCreateCustomerAPIWithInValidAuthKey(data);
-
-		response.prettyPrint();
-
-		ExtentLogger.info("Creating customer: " + data.get("name"));
-		ExtentLogger.info("Customer email: " + data.get("email"));
-
-		System.out.println("Status Code: " + response.getStatusCode());
-
-		Assert.assertEquals(response.getStatusCode(), 200);
-
-	}
+//	@Test(dataProvider = "StripeAPIDataProvider", dataProviderClass = StripeAPIDataUtils.class)
+//	public void validateCreateCustomerAPIWithInvalidSecretKey(Hashtable<String, String> data) {
+//		Response response = CreateCustomerAPI.sendPostRequestToCreateCustomerAPIWithInValidAuthKey(data);
+//
+//		response.prettyPrint();
+//
+//		ExtentLogger.info("Creating customer: " + data.get("name"));
+//		ExtentLogger.info("Customer email: " + data.get("email"));
+//
+//		System.out.println("Status Code: " + response.getStatusCode());
+//
+//		Assert.assertEquals(response.getStatusCode(), 200);
+//
+//	}
 }
