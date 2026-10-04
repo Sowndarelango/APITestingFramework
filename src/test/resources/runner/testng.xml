@@ -6,12 +6,14 @@
 		<listener
 			class-name="com.w2a.APITestingFramework.ExtentReports.ExtentTestNGListener" />
 	</listeners>
-	<test name="StripeAPI Testing">
+	<test name="Stripe and PayPal API Testing">
 		<classes>
 			<class
 				name="com.w2a.APITestingFramework.TestCases.CreateCustomerTest" />
 			<class
 				name="com.w2a.APITestingFramework.TestCases.DeleteCustomerTest" />
+			<class name="com.w2a.APITestingFramework.TestCases.PayPalAPITest" />
 		</classes>
+
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
