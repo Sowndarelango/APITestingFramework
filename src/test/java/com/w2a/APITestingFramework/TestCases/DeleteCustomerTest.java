@@ -14,16 +14,16 @@ import io.restassured.response.Response;
 
 public class DeleteCustomerTest extends BaseTest {
 
-//	@Test(dataProvider = "StripeAPIDataProvider", dataProviderClass = StripeAPIDataUtils.class)
-//	public void DeleteCustomer(Hashtable<String, String> data) {
-//		Response response = DeleteCustomerAPI.sendDeleteRequestToDeleteCustomerAPIWithValidID(data);
-//
-//		response.prettyPrint();
-//		
-//		ExtentLogger.info("Deleting customer for ID: " + data.get("id"));
-//
-//		System.out.println("Status Code: " + response.getStatusCode());
-//
-//		Assert.assertEquals(response.getStatusCode(), 200);
-//	}
+	@Test(dataProvider = "StripeAPIDataProvider", dataProviderClass = StripeAPIDataUtils.class)
+	public void DeleteCustomer(Hashtable<String, String> data) {
+		Response response = DeleteCustomerAPI.sendDeleteRequestToDeleteCustomerAPIWithValidID(data);
+
+		response.prettyPrint();
+		
+		ExtentLogger.info("Deleting customer for ID: " + data.get("id"));
+
+		System.out.println("Status Code: " + response.getStatusCode());
+
+		Assert.assertEquals(response.getStatusCode(), 404);
+	}
 }
